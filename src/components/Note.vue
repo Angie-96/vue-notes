@@ -1,12 +1,17 @@
 <template>
   <div>
-    <div v-if="note.state === false" class="new-item">
+    <div v-if="!note.state" class="new-item">
       <button class="editbtn" role="button" @click="toggleEdit">
         <unicon name="edit" fill="#7dbf94" style="display:flex"></unicon>
       </button>
     </div>
     <div v-else class="new-item">
-      <input type="text" placeholder="Add a new item" ref="newitem" @keyup.enter="addItem" />
+      <input
+        type="text"
+        placeholder="Add a new item"
+        ref="newitem"
+        @keyup.enter="addItem"
+      />
       <button role="button" @click="addItem">
         <unicon name="plus" fill="#df815a" style="display:flex"></unicon>
       </button>
@@ -15,12 +20,21 @@
       </button>
     </div>
     <ul>
-      <li
-        v-for="(item, index) in note.content"
-        :key="index"
-        v-bind:class="{ checked: item.checked }"
-        v-on:click="changeStatus(item)"
-      >{{ item.label }}</li>
+      <li v-for="(item, index) in note.content" :key="item.index">
+        <p
+          v-bind:class="{ checked: item.checked }"
+          v-on:click="changeStatus(item)"
+        >
+          {{ item.label }}
+        </p>
+        <unicon
+          name="trash-alt"
+          v-if="note.state"
+          @click="deleteItem(index)"
+          fill="#df815a"
+          class="delete-icon"
+        ></unicon>
+      </li>
     </ul>
   </div>
 </template>
@@ -38,7 +52,47 @@ export default {
     },
     changeStatus(item) {
       item.checked = !item.checked;
-    }
-  }
+    },
+
+    deleteItem(index) {
+      this.note.content.splice(index, 1);
+    },
+  },
 };
 </script>
+
+<style>
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.new-item {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+li {
+  display: flex;
+  flex-direction: row;
+  margin: 20px 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.checked {
+  text-decoration: line-through;
+  opacity: 0.5;
+  font-size: 17px;
+}
+
+li p {
+  margin: 5px;
+  flex-grow: 1;
+}
+
+li.delete-icon {
+  flex-grow: 1;
+}
+</style>

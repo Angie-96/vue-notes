@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="shopping-list">
+    <div class="notes-container">
       <div class="header">
         <h1>{{ header }}</h1>
       </div>
@@ -17,7 +17,7 @@ import Notes from "./components/Notes.vue";
 export default {
   name: "App",
   components: {
-    Notes
+    Notes,
   },
   data: () => ({
     header: "my notes",
@@ -29,8 +29,8 @@ export default {
         content: [
           { label: "Learn HTML", checked: true },
           { label: "Learn CSS", checked: true },
-          { label: "Learn Javascript", checked: false }
-        ]
+          { label: "Learn Javascript", checked: false },
+        ],
       },
       {
         state: false,
@@ -38,18 +38,18 @@ export default {
           { label: "Buy some coffee", checked: false },
           { label: "Learn Git", checked: false },
           { label: "Learn Vue", checked: false },
-          { label: "Eat some cake", checked: false }
-        ]
+          { label: "Eat some cake", checked: false },
+        ],
       },
       {
         state: false,
         content: [
           { label: "Create a new repository on Github", checked: false },
-          { label: "Commit & push changes", checked: false }
-        ]
-      }
-    ]
-  })
+          { label: "Commit & push changes", checked: false },
+        ],
+      },
+    ],
+  }),
 };
 </script>
 
@@ -60,18 +60,17 @@ body {
   background-color: #f0f0f0;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
-}
 
-.shopping-list {
-  max-width: 70%;
-  height: 70vh;
-  margin: auto;
   color: rgba(144, 152, 168, 1);
   font-family: "IBM Plex Sans", sans-serif;
+}
+
+.notes-container {
+  max-width: 70%;
+  margin: auto;
 }
 
 button {
@@ -111,68 +110,16 @@ input::placeholder {
 .header {
   height: 100px;
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   justify-content: center;
-}
-
-.notes {
-  display: grid;
-  grid-template-rows: max-content;
-  margin-top: 20px;
 }
 
 .centeredtext {
   text-align: center;
 }
 
-.note-block {
-  border-radius: 10px;
-  padding: 20px;
-  margin: 10px 20px;
-  box-shadow: 6px 6px 16px 0 rgba(217, 210, 200, 0.51),
-    -6px -6px 16px 0 rgba(255, 255, 255, 0.76);
-  height: max-content;
-}
-
-.note-block ul {
-  width: max-content;
-}
-
-.note-block .new-item {
-  display: flex;
-  justify-content: end;
-  align-items: center;
-}
-
-.note-block li.checked {
-  text-decoration: line-through;
-  opacity: 0.5;
-  font-size: 17px;
-}
-
 .header h1 {
   color: rgb(88, 88, 88);
   margin: 0;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: flex;
-  flex-direction: column;
-  margin: 20px 10px;
-  cursor: pointer;
-  font-size: 18px;
-}
-a {
-  color: #42b983;
-}
-
-@media (min-width: 992px) {
-  .notes {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
 }
 </style>
