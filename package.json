@@ -1,5 +1,5 @@
 {
-  "name": "vue-shopping-list",
+  "name": "vue-notes-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,8 +11,7 @@
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-router": "^3.3.4",
-    "vue-unicons": "^2.3.0",
-    "vue-unique-id": "^3.1.0"
+    "vue-unicons": "^2.3.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
