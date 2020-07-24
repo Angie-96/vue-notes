@@ -77,6 +77,7 @@ export default {
       },
     ],
   }),
+
   methods: {
     addNote() {
       this.notes.push({
@@ -117,6 +118,11 @@ button {
   box-shadow: 6px 6px 16px 0 rgba(217, 210, 200, 0.51),
     -6px -6px 16px 0 rgba(255, 255, 255, 0.76);
   border-radius: 50%;
+  min-width: 47px;
+  min-height: 47px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button:hover {

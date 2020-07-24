@@ -1,12 +1,12 @@
 <template>
   <masonry class="notes" :cols="{ default: 3, 992: 2, 700: 1 }" :gutter="20">
-    <div
-      class="note-block"
-      v-for="(note, index) in notes"
-      :key="index"
-      :ref="'note' + index"
-    >
-      <note :note="note" :notes="notes" :updateNote="updateNote(index)"></note>
+    <div class="note-block" v-for="(note, index) in notes" :key="index" :ref="'note' + index">
+      <note
+        :note="note"
+        :notes="notes"
+        :updateNote="updateNote(index)"
+        @deleteNote="notes.splice([index], 1)"
+      ></note>
     </div>
   </masonry>
 </template>
@@ -20,8 +20,8 @@ export default {
   },
   props: ["notes"],
   methods: {
-    updateNote: function(index) {
-      return function(text) {
+    updateNote: function (index) {
+      return function (text) {
         if (text != 0) {
           this.notes[index].content.push({
             label: text,
@@ -44,7 +44,7 @@ export default {
 .note-block {
   border-radius: 10px;
   padding: 20px;
-  margin-top: 10px;
+  margin-top: 20px;
   box-shadow: 6px 6px 16px 0 rgba(217, 210, 200, 0.51),
     -6px -6px 16px 0 rgba(255, 255, 255, 0.76);
   height: max-content;
