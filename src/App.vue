@@ -3,6 +3,9 @@
     <div class="notes-container">
       <div class="header">
         <h1>{{ header }}</h1>
+        <button role="button" class="primary-btn" @click="addNote">
+          <unicon name="plus" fill="#df815a" style="display:flex"></unicon>
+        </button>
       </div>
       <notes :notes="notes"></notes>
       <p v-if="notes.length === 0" class="centeredtext">Nice job!</p>
@@ -48,8 +51,40 @@ export default {
           { label: "Commit & push changes", checked: false },
         ],
       },
+      {
+        state: false,
+        content: [
+          { label: "Learn HTML", checked: true },
+          { label: "Learn CSS", checked: true },
+          { label: "Learn Javascript", checked: false },
+        ],
+      },
+      {
+        state: false,
+        content: [
+          { label: "Buy some coffee", checked: false },
+          { label: "Learn Git", checked: false },
+          { label: "Learn Vue", checked: false },
+          { label: "Eat some cake", checked: false },
+        ],
+      },
+      {
+        state: false,
+        content: [
+          { label: "Create a new repository on Github", checked: false },
+          { label: "Commit & push changes", checked: false },
+        ],
+      },
     ],
   }),
+  methods: {
+    addNote() {
+      this.notes.push({
+        state: true,
+        content: [],
+      });
+    },
+  },
 };
 </script>
 
@@ -112,6 +147,7 @@ input::placeholder {
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  margin: 0 20px;
 }
 
 .centeredtext {
@@ -121,5 +157,7 @@ input::placeholder {
 .header h1 {
   color: rgb(88, 88, 88);
   margin: 0;
+  text-align: center;
+  flex-grow: 2;
 }
 </style>
