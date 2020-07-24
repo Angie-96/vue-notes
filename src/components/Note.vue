@@ -6,33 +6,26 @@
       </button>
     </div>
     <div v-else class="new-item">
-      <input
-        type="text"
-        placeholder="Add a new item"
-        ref="newitem"
-        @keyup.enter="addItem"
-      />
+      <input type="text" placeholder="Add a new item" ref="newitem" @keyup.enter="addItem" />
       <button role="button" @click="addItem">
         <unicon name="plus" fill="#df815a" style="display:flex"></unicon>
       </button>
       <button role="button" @click="toggleEdit">
         <unicon name="save" fill="#639bb4" style="display:flex"></unicon>
       </button>
+      <button role="button" @click="deleteNote()" class="delete-note">
+        <unicon name="trash-alt" fill="#df815a"></unicon>
+      </button>
     </div>
     <ul>
       <li v-for="(item, index) in note.content" :key="item.index">
-        <p
-          v-bind:class="{ checked: item.checked }"
-          v-on:click="changeStatus(item)"
-        >
-          {{ item.label }}
-        </p>
+        <p v-bind:class="{ checked: item.checked }" v-on:click="changeStatus(item)">{{ item.label }}</p>
         <unicon
           name="trash-alt"
           v-if="note.state"
           @click="deleteItem(index)"
           fill="#df815a"
-          class="delete-icon"
+          class="delete-item"
         ></unicon>
       </li>
     </ul>
@@ -42,6 +35,9 @@
 <script>
 export default {
   props: ["note", "notes", "updateNote"],
+  mounted() {
+    this.$nextTick(() => this.$refs.newitem.focus());
+  },
   methods: {
     toggleEdit() {
       this.note.state = !this.note.state;
@@ -56,6 +52,9 @@ export default {
 
     deleteItem(index) {
       this.note.content.splice(index, 1);
+    },
+    deleteNote() {
+      this.$emit("deleteNote");
     },
   },
 };
@@ -92,7 +91,7 @@ li p {
   flex-grow: 1;
 }
 
-li.delete-icon {
+li.delete-item {
   flex-grow: 1;
 }
 </style>
